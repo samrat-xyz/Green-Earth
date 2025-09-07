@@ -97,10 +97,29 @@
                 <!-- Cards Section (middle) -->
                 <section id="card-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
                 </section>
+                <dialog id="plantModal" class="modal">
+                    <div class="modal-box">
+                        
+                        <h3 id="modalName" class="text-lg font-bold"></h3>
+                            <img id="modalImage" class="w-full h-40 object-cover rounded-lg my-2" src="" alt="">
+                        
+                        
+                        <p id="modalDescription" class="py-2 text-gray-600"></p>
+                        <div class="flex items-center justify-between my-2">
+                            <h5 id="modalCategory" class="rounded-lg py-1 px-2 text-sm text-[#15803D] bg-[#DCFCE7]">
+                            </h5>
+                            <span id="modalPrice" class="font-semibold"></span>
+                        </div>
+                        <div class="modal-action">
+                            <button class="btn" onclick="plantModal.close()">Close</button>
+                        </div>
+                    </div>
+                </dialog>
+
 
                 <!-- Cart Section (right) -->
-                <aside class=" w-full lg:w-1/6 p-3 rounded-md shadow-md bg-white">
-                    <h2 class="text-xl font-bold mb-3">Your Cart</h2>
+                <aside class=" w-full lg:w-1/6 px-4 py-3 rounded-md shadow-md bg-white ">
+                    <h2 class="text-xl font-bold mb-5">Your Cart</h2>
                     <ul id="cart-items" class="space-y-3"></ul>
 
                     <!-- Total Section -->

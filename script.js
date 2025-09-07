@@ -103,7 +103,9 @@ const displayCategoryData = (plants) => {
                     <img src="${plant.image}" alt="${plant.name}" class="w-full h-40 object-cover rounded-lg">
                 </div>
                 <div>
-                    <h3 class="text-lg font-bold">${plant.name}</h3>
+                    <h3 class="text-lg font-bold cursor-pointer" onclick='openPlantModal(${JSON.stringify(
+                      plant
+                    )})'>${plant.name}</h3>
                     <p class="text-sm text-gray-600 my-2">
                       ${plant.description.length > 80 ? plant.description.slice(0, 80) + "..." : plant.description}
                     </p>
@@ -158,7 +160,9 @@ const displayCards = (cards) => {
                     <img src="${card.image}" alt="${card.name}" class="w-full h-40 object-cover rounded-lg">
                 </div>
                 <div>
-                    <h3 class="text-lg font-bold">${card.name}</h3>
+                    <h3 class="text-lg font-bold cursor-pointer" onclick='openPlantModal(${JSON.stringify(
+                      card
+                    )})'>${card.name}</h3>
                     <p class="text-sm text-gray-600 my-2">
                       ${card.description.length > 80 ? card.description.slice(0, 80) + "..." : card.description}
                     </p>
@@ -222,4 +226,17 @@ const displayCart = () => {
 const removeFromCart = (index) => {
   cart.splice(index, 1);
   displayCart();
+};
+
+// ==================== Open Plant Modal ====================
+const openPlantModal = (plant) => {
+  document.getElementById("modalName").innerText = plant.name;
+  document.getElementById("modalImage").src = plant.image;
+  document.getElementById("modalImage").alt = plant.name;
+  document.getElementById("modalDescription").innerText = plant.description;
+  document.getElementById("modalCategory").innerText = plant.category;
+  document.getElementById("modalPrice").innerText = `৳${plant.price}`;
+
+  const modal = document.getElementById("plantModal");
+  modal.showModal();
 };
