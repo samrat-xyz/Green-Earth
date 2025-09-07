@@ -85,7 +85,7 @@ const displayCategoryData = (plants) => {
                         <h5 class="rounded-lg py-1 px-2 text-sm text-[#15803D] bg-[#DCFCE7]">${plant.category}</h5>
                         <span class="font-semibold">৳${plant.price}</span>
                     </div>
-                    <button onclick='addToCart(${JSON.stringify(plant)})' class="bg-green-500 text-white py-2 w-full rounded-lg mt-2 hover:bg-green-600">Add To Cart</button>
+                    <button onclick='addToCart(${JSON.stringify(plant)})' class="bg-green-500  text-white py-2 w-full rounded-lg mt-2 hover:bg-green-600 cursor-pointer">Add To Cart</button>
                 </div>
             </div>
         `;
@@ -136,7 +136,7 @@ const displayCards = (cards) => {
                         <h5 class="rounded-lg py-1 px-2 text-sm text-[#15803D] bg-[#DCFCE7]">${card.category}</h5>
                         <span class="font-semibold">৳${card.price}</span>
                     </div>
-                    <button onclick='addToCart(${JSON.stringify(card)})' class="bg-green-500 text-white py-2 w-full rounded-lg mt-2 hover:bg-green-600">Add To Cart</button>
+                    <button onclick='addToCart(${JSON.stringify(card)})' class="bg-green-500 text-white py-2 w-full rounded-lg mt-2 hover:bg-green-600 cursor-pointer">Add To Cart</button>
                 </div>
             </div>
         `;
@@ -176,7 +176,7 @@ const displayCart = () => {
           <span class="font-medium text-gray-800">${item.name}</span>
           <span class="text-sm text-gray-600">৳${item.price} × ${item.quantity}</span>
         </div>
-        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 text-sm">❌</button>
+        <button onclick="removeFromCart(${index})" class="cursor text-red-500 hover:text-red-700 text-sm cursor-pointer">❌</button>
       </div>
     `;
     cartItems.appendChild(li);
