@@ -80,41 +80,39 @@
         </section>
     </header>
 
-   <!-- api section card and add to cart -->
-<div>
-  <section>
-    <h1 class="text-xl md:text-3xl text-center font-bold my-5">
-      Choose Your Trees
-    </h1>
+    <!-- api section card and add to cart -->
+    <div>
+        <section>
+            <h1 class="text-xl md:text-3xl text-center font-bold my-5">
+                Choose Your Trees
+            </h1>
 
-    <div
-      class="px-5 border flex flex-col lg:flex-row gap-6 mt-8"
-    >
-      <!-- Category Section (left) -->
-      <aside
-        class="w-full lg:w-1/6 border p-3"
-      >
-        <h2 class="text-xl font-bold mb-3">Categories</h2>
-        <ul id="category-section" class="space-y-2"></ul>
-      </aside>
+            <div class="px-5 border flex flex-col lg:flex-row gap-6 mt-8">
+                <!-- Category Section (left) -->
+                <aside class="w-full lg:w-1/6 border p-3">
+                    <h2 class="text-xl font-bold mb-3">Categories</h2>
+                    <ul id="category-section" class="space-y-2"></ul>
+                </aside>
 
-      <!-- Cards Section (middle) -->
-      <section
-        id="card-section"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-1"
-      ></section>
+                <!-- Cards Section (middle) -->
+                <section id="card-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
+                </section>
 
-      <!-- Cart Section (right) -->
-      <aside
-        class="border w-full lg:w-1/6 p-3"
-      >
-        <h2 class="text-xl font-bold mb-3">Your Cart</h2>
-        <ul id="cart-items" class="space-y-3"></ul>
-        <p id="cart-total" class="font-bold mt-3">Total: $0</p>
-      </aside>
+                <!-- Cart Section (right) -->
+                <aside class="border w-full lg:w-1/6 p-3">
+                    <h2 class="text-xl font-bold mb-3">Your Cart</h2>
+                    <ul id="cart-items" class="space-y-3"></ul>
+
+                    <!-- Total Section -->
+                    <div class="flex justify-between font-bold mt-3  pt-2">
+                        <span>Total:</span>
+                        <span id="cart-total">৳0</span>
+                    </div>
+                </aside>
+
+            </div>
+        </section>
     </div>
-  </section>
-</div>
 
 
     <script src="script.js"></script>

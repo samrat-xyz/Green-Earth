@@ -1,76 +1,79 @@
+// ==================== Cart State ====================
+let cart = [];
+
 // ==================== Load Categories ====================
 const loadCategories = () => {
-    const categorySection = document.getElementById('category-section');
-    
-    // Small loader while categories load
-    categorySection.innerHTML = `<span class="loading loading-dots loading-lg flex justify-center my-4"></span>`;
+  const categorySection = document.getElementById("category-section");
 
-    fetch('https://openapi.programming-hero.com/api/categories')
-        .then(res => res.json())
-        .then(data => displayCategories(data.categories))
-        .catch(err => console.error("Error loading categories:", err));
+  // Small loader while categories load
+  categorySection.innerHTML = `<span class="loading loading-dots loading-lg flex justify-center my-4"></span>`;
+
+  fetch("https://openapi.programming-hero.com/api/categories")
+    .then((res) => res.json())
+    .then((data) => displayCategories(data.categories))
+    .catch((err) => console.error("Error loading categories:", err));
 };
 
 loadCategories();
 
 const displayCategories = (categories) => {
-    const categorySection = document.getElementById('category-section');
-    categorySection.innerHTML = ""; 
+  const categorySection = document.getElementById("category-section");
+  categorySection.innerHTML = "";
 
-    // Add "All Trees" option
-    const allTreesItem = document.createElement('li');
-    allTreesItem.innerHTML = `
+  // Add "All Trees" option
+  const allTreesItem = document.createElement("li");
+  allTreesItem.innerHTML = `
         <span onclick="loadCards()" 
             class="my-3 text-lg py-1 px-2 hover:bg-green-600 text-black hover:text-white rounded-sm block cursor-pointer">
-            🌳 All Trees
+             All Trees
         </span>
     `;
-    categorySection.appendChild(allTreesItem);
+  categorySection.appendChild(allTreesItem);
 
-    // Add categories from API
-    for (let category of categories) {
-        const categoryItem = document.createElement('li');
-        categoryItem.innerHTML = `
+  // Add categories from API
+  for (let category of categories) {
+    const categoryItem = document.createElement("li");
+    categoryItem.innerHTML = `
             <span onclick="loadCategoryData(${category.id})" 
                 class="my-3 text-lg py-1 px-2 hover:bg-green-600 text-black hover:text-white rounded-sm block cursor-pointer">
                 ${category.category_name}
             </span>
         `;
-        categorySection.appendChild(categoryItem);
-    }
+    categorySection.appendChild(categoryItem);
+  }
 };
 
 // ==================== Load Category Data ====================
 const loadCategoryData = (id) => {
-    const section = document.getElementById('card-section');
+  const section = document.getElementById("card-section");
 
-    // Loader spanning all columns
-    section.innerHTML = `
+  // Loader spanning all columns
+  section.innerHTML = `
         <div class="col-span-full flex justify-center my-6">
             <span class="loading loading-dots loading-lg"></span>
         </div>
     `;
 
-    const url = `https://openapi.programming-hero.com/api/category/${id}`;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayCategoryData(data.plants))
-        .catch(err => console.error("Error loading category data:", err));
+  const url = `https://openapi.programming-hero.com/api/category/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displayCategoryData(data.plants))
+    .catch((err) => console.error("Error loading category data:", err));
 };
 
 // ==================== Display Category Data ====================
 const displayCategoryData = (plants) => {
-    const section = document.getElementById('card-section');
-    section.innerHTML = "";
+  const section = document.getElementById("card-section");
+  section.innerHTML = "";
 
-    if (!plants || plants.length === 0) {
-        section.innerHTML = `<p class="col-span-full text-center text-gray-500">No plants found in this category.</p>`;
-        return;
-    }
+  if (!plants || plants.length === 0) {
+    section.innerHTML = `<p class="col-span-full text-center text-gray-500">No plants found in this category.</p>`;
+    return;
+  }
 
-    for (let plant of plants) {
-        let contentDiv = document.createElement('div');
-        contentDiv.innerHTML = `
+  for (let plant of plants) {
+    let contentDiv = document.createElement("div");
+    contentDiv.innerHTML = `
             <div class="p-4 rounded-xl shadow-2xl">
                 <div class="mb-2">
                     <img src="${plant.image}" alt="${plant.name}" class="w-full h-40 object-cover rounded-lg">
@@ -80,48 +83,48 @@ const displayCategoryData = (plants) => {
                     <p class="text-sm text-gray-600 my-2">${plant.description}</p>
                     <div class="flex items-center justify-between my-2">
                         <h5 class="rounded-lg py-1 px-2 text-sm text-[#15803D] bg-[#DCFCE7]">${plant.category}</h5>
-                        <span class="font-semibold">$${plant.price}</span>
+                        <span class="font-semibold">৳${plant.price}</span>
                     </div>
-                    <button class="bg-green-500 text-white py-2 w-full rounded-lg mt-2 hover:bg-green-600">Add To Cart</button>
+                    <button onclick='addToCart(${JSON.stringify(plant)})' class="bg-green-500 text-white py-2 w-full rounded-lg mt-2 hover:bg-green-600">Add To Cart</button>
                 </div>
             </div>
-        `; 
-        section.appendChild(contentDiv);
-    }
+        `;
+    section.appendChild(contentDiv);
+  }
 };
 
 // ==================== Load All Cards ====================
 const loadCards = () => {
-    const cardSection = document.getElementById('card-section');
+  const cardSection = document.getElementById("card-section");
 
-    // Loader spanning all columns
-    cardSection.innerHTML = `
+  // Loader spanning all columns
+  cardSection.innerHTML = `
         <div class="col-span-full flex justify-center my-6">
             <span class="loading loading-dots loading-lg"></span>
         </div>
     `;
 
-    fetch('https://openapi.programming-hero.com/api/plants')
-        .then(res => res.json())
-        .then(data => displayCards(data.plants))
-        .catch(err => console.error("Error loading cards:", err));
+  fetch("https://openapi.programming-hero.com/api/plants")
+    .then((res) => res.json())
+    .then((data) => displayCards(data.plants))
+    .catch((err) => console.error("Error loading cards:", err));
 };
 
 loadCards();
 
 // ==================== Display All Cards ====================
 const displayCards = (cards) => {
-    const cardSection = document.getElementById('card-section');
-    cardSection.innerHTML = ""; 
+  const cardSection = document.getElementById("card-section");
+  cardSection.innerHTML = "";
 
-    if (!cards || cards.length === 0) {
-        cardSection.innerHTML = `<p class="col-span-full text-center text-gray-500">No plants available.</p>`;
-        return;
-    }
+  if (!cards || cards.length === 0) {
+    cardSection.innerHTML = `<p class="col-span-full text-center text-gray-500">No plants available.</p>`;
+    return;
+  }
 
-    for (let card of cards) {
-        const cardDiv = document.createElement('div');
-        cardDiv.innerHTML = `
+  for (let card of cards) {
+    const cardDiv = document.createElement("div");
+    cardDiv.innerHTML = `
             <div class="p-4 rounded-xl shadow-2xl">
                 <div class="mb-2">
                     <img src="${card.image}" alt="${card.name}" class="w-full h-40 object-cover rounded-lg">
@@ -131,12 +134,60 @@ const displayCards = (cards) => {
                     <p class="text-sm text-gray-600 my-2">${card.description}</p>
                     <div class="flex items-center justify-between my-2">
                         <h5 class="rounded-lg py-1 px-2 text-sm text-[#15803D] bg-[#DCFCE7]">${card.category}</h5>
-                        <span class="font-semibold">$${card.price}</span>
+                        <span class="font-semibold">৳${card.price}</span>
                     </div>
-                    <button class="bg-green-500 text-white py-2 w-full rounded-lg mt-2 hover:bg-green-600">Add To Cart</button>
+                    <button onclick='addToCart(${JSON.stringify(card)})' class="bg-green-500 text-white py-2 w-full rounded-lg mt-2 hover:bg-green-600">Add To Cart</button>
                 </div>
             </div>
         `;
-        cardSection.appendChild(cardDiv);
-    }
+    cardSection.appendChild(cardDiv);
+  }
+};
+
+// ==================== Add To Cart ====================
+const addToCart = (product) => {
+  const existingItem = cart.find((item) => item.id === product.id);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
+
+  displayCart();
+};
+
+// ==================== Display Cart ====================
+const displayCart = () => {
+  const cartItems = document.getElementById("cart-items");
+  const cartTotal = document.getElementById("cart-total");
+  cartItems.innerHTML = "";
+
+  let total = 0;
+  cart.forEach((item, index) => {
+    total += item.price * item.quantity;
+
+    const li = document.createElement("li");
+    li.classList = "flex justify-between items-center mb-2";
+
+    li.innerHTML = `
+      <div class="flex items-center justify-between py-2 px-3 rounded-lg shadow-md  w-full">
+        <div class="flex flex-col bg-[#F0FDF4]">
+          <span class="font-medium text-gray-800">${item.name}</span>
+          <span class="text-sm text-gray-600">৳${item.price} × ${item.quantity}</span>
+        </div>
+        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 text-sm">❌</button>
+      </div>
+    `;
+    cartItems.appendChild(li);
+  });
+
+  // total section update
+  cartTotal.innerText = `Total: ৳${total}`;
+};
+
+// ==================== Remove From Cart ====================
+const removeFromCart = (index) => {
+  cart.splice(index, 1);
+  displayCart();
 };
