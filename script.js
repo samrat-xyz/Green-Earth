@@ -85,7 +85,7 @@ const displayCategoryData = (plants) => {
                         <h5 class="rounded-lg py-1 px-2 text-sm text-[#15803D] bg-[#DCFCE7]">${plant.category}</h5>
                         <span class="font-semibold">৳${plant.price}</span>
                     </div>
-                    <button onclick='addToCart(${JSON.stringify(plant)})' class="bg-green-500  text-white py-2 w-full rounded-lg mt-2 hover:bg-green-600 cursor-pointer">Add To Cart</button>
+                    <button onclick='addToCart(${JSON.stringify(plant)})' class="text-white py-2 w-full bg-[#15803D] rounded-full mt-2 hover:bg-green-600 cursor-pointer">Add To Cart</button>
                 </div>
             </div>
         `;
@@ -136,7 +136,7 @@ const displayCards = (cards) => {
                         <h5 class="rounded-lg py-1 px-2 text-sm text-[#15803D] bg-[#DCFCE7]">${card.category}</h5>
                         <span class="font-semibold">৳${card.price}</span>
                     </div>
-                    <button onclick='addToCart(${JSON.stringify(card)})' class="bg-green-500 text-white py-2 w-full rounded-lg mt-2 hover:bg-green-600 cursor-pointer">Add To Cart</button>
+                    <button onclick='addToCart(${JSON.stringify(card)})' class="bg-[#15803D] rounded-full text-white py-2 w-full mt-2 hover:bg-green-600 cursor-pointer">Add To Cart</button>
                 </div>
             </div>
         `;
@@ -171,12 +171,12 @@ const displayCart = () => {
     li.classList = "flex justify-between items-center mb-2";
 
     li.innerHTML = `
-      <div class="flex items-center justify-between py-2 px-3 rounded-lg shadow-md  w-full">
-        <div class="flex flex-col bg-[#F0FDF4]">
+      <div class="flex items-center justify-between py-2 px-3 rounded-sm shadow-sm bg-[#F0FDF4] w-full">
+        <div class="flex flex-col ">
           <span class="font-medium text-gray-800">${item.name}</span>
           <span class="text-sm text-gray-600">৳${item.price} × ${item.quantity}</span>
         </div>
-        <button onclick="removeFromCart(${index})" class="cursor text-red-500 hover:text-red-700 text-sm cursor-pointer">❌</button>
+        <button onclick="removeFromCart(${index})" class="text-sm cursor-pointer">❌</button>
       </div>
     `;
     cartItems.appendChild(li);
