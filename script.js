@@ -104,7 +104,9 @@ const displayCategoryData = (plants) => {
                 </div>
                 <div>
                     <h3 class="text-lg font-bold">${plant.name}</h3>
-                    <p class="text-sm text-gray-600 my-2">${plant.description}</p>
+                    <p class="text-sm text-gray-600 my-2">
+                      ${plant.description.length > 80 ? plant.description.slice(0, 80) + "..." : plant.description}
+                    </p>
                     <div class="flex items-center justify-between my-2">
                         <h5 class="rounded-lg py-1 px-2 text-sm text-[#15803D] bg-[#DCFCE7]">${plant.category}</h5>
                         <span class="font-semibold">৳${plant.price}</span>
@@ -157,7 +159,9 @@ const displayCards = (cards) => {
                 </div>
                 <div>
                     <h3 class="text-lg font-bold">${card.name}</h3>
-                    <p class="text-sm text-gray-600 my-2">${card.description}</p>
+                    <p class="text-sm text-gray-600 my-2">
+                      ${card.description.length > 80 ? card.description.slice(0, 80) + "..." : card.description}
+                    </p>
                     <div class="flex items-center justify-between my-2">
                         <h5 class="rounded-lg py-1 px-2 text-sm text-[#15803D] bg-[#DCFCE7]">${card.category}</h5>
                         <span class="font-semibold">৳${card.price}</span>
