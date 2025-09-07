@@ -1,5 +1,6 @@
 // ==================== Cart State ====================
 let cart = [];
+let activeCategoryId = "all"; // default active "All Trees"
 
 // ==================== Load Categories ====================
 const loadCategories = () => {
@@ -23,8 +24,12 @@ const displayCategories = (categories) => {
   // Add "All Trees" option
   const allTreesItem = document.createElement("li");
   allTreesItem.innerHTML = `
-        <span onclick="loadCards()" 
-            class="my-3 text-lg py-1 px-2 hover:bg-green-600 text-black hover:text-white rounded-sm block cursor-pointer">
+        <span data-id="all" onclick="handleCategoryClick('all')" 
+            class="my-3 text-lg py-1 px-2 rounded-sm block cursor-pointer ${
+              activeCategoryId === "all"
+                ? "bg-green-600 text-white"
+                : "hover:bg-green-600 text-black hover:text-white"
+            }">
              All Trees
         </span>
     `;
@@ -34,12 +39,31 @@ const displayCategories = (categories) => {
   for (let category of categories) {
     const categoryItem = document.createElement("li");
     categoryItem.innerHTML = `
-            <span onclick="loadCategoryData(${category.id})" 
-                class="my-3 text-lg py-1 px-2 hover:bg-green-600 text-black hover:text-white rounded-sm block cursor-pointer">
+            <span data-id="${category.id}" onclick="handleCategoryClick('${category.id}')" 
+                class="my-3 text-lg py-1 px-2 rounded-sm block cursor-pointer ${
+                  activeCategoryId == category.id
+                    ? "bg-green-600 text-white"
+                    : "hover:bg-green-600 text-black hover:text-white"
+                }">
                 ${category.category_name}
             </span>
         `;
     categorySection.appendChild(categoryItem);
+  }
+};
+
+// ==================== Handle Category Click ====================
+const handleCategoryClick = (id) => {
+  activeCategoryId = id; // update active category
+
+  // Re-render categories with updated active
+  loadCategories();
+
+  // Load data
+  if (id === "all") {
+    loadCards();
+  } else {
+    loadCategoryData(id);
   }
 };
 
@@ -85,7 +109,9 @@ const displayCategoryData = (plants) => {
                         <h5 class="rounded-lg py-1 px-2 text-sm text-[#15803D] bg-[#DCFCE7]">${plant.category}</h5>
                         <span class="font-semibold">৳${plant.price}</span>
                     </div>
-                    <button onclick='addToCart(${JSON.stringify(plant)})' class="text-white py-2 w-full bg-[#15803D] rounded-full mt-2 hover:bg-green-600 cursor-pointer">Add To Cart</button>
+                    <button onclick='addToCart(${JSON.stringify(
+                      plant
+                    )})' class="text-white py-2 w-full bg-[#15803D] rounded-full mt-2 hover:bg-green-600 cursor-pointer">Add To Cart</button>
                 </div>
             </div>
         `;
@@ -136,7 +162,9 @@ const displayCards = (cards) => {
                         <h5 class="rounded-lg py-1 px-2 text-sm text-[#15803D] bg-[#DCFCE7]">${card.category}</h5>
                         <span class="font-semibold">৳${card.price}</span>
                     </div>
-                    <button onclick='addToCart(${JSON.stringify(card)})' class="bg-[#15803D] rounded-full text-white py-2 w-full mt-2 hover:bg-green-600 cursor-pointer">Add To Cart</button>
+                    <button onclick='addToCart(${JSON.stringify(
+                      card
+                    )})' class="bg-[#15803D] rounded-full text-white py-2 w-full mt-2 hover:bg-green-600 cursor-pointer">Add To Cart</button>
                 </div>
             </div>
         `;
