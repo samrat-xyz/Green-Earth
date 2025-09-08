@@ -1,12 +1,11 @@
-// ==================== Cart State ====================
+// Cart State
 let cart = [];
-let activeCategoryId = "all"; // default active "All Trees"
+let activeCategoryId = "all";
 
-// ==================== Load Categories ====================
+// Load Categories
 const loadCategories = () => {
   const categorySection = document.getElementById("category-section");
 
-  // Small loader while categories load
   categorySection.innerHTML = `<span class="loading loading-dots loading-lg flex justify-center my-4"></span>`;
 
   fetch("https://openapi.programming-hero.com/api/categories")
@@ -21,7 +20,6 @@ const displayCategories = (categories) => {
   const categorySection = document.getElementById("category-section");
   categorySection.innerHTML = "";
 
-  // Add "All Trees" option
   const allTreesItem = document.createElement("li");
   allTreesItem.innerHTML = `
         <span data-id="all" onclick="handleCategoryClick('all')" 
@@ -52,9 +50,9 @@ const displayCategories = (categories) => {
   }
 };
 
-// ==================== Handle Category Click ====================
+// Handle Category Click 
 const handleCategoryClick = (id) => {
-  activeCategoryId = id; // update active category
+  activeCategoryId = id; 
 
   // Re-render categories with updated active
   loadCategories();
@@ -67,11 +65,11 @@ const handleCategoryClick = (id) => {
   }
 };
 
-// ==================== Load Category Data ====================
+// Load Category Data
 const loadCategoryData = (id) => {
   const section = document.getElementById("card-section");
 
-  // Loader spanning all columns
+  
   section.innerHTML = `
         <div class="col-span-full flex justify-center my-6">
             <span class="loading loading-dots loading-lg"></span>
@@ -85,7 +83,7 @@ const loadCategoryData = (id) => {
     .catch((err) => console.error("Error loading category data:", err));
 };
 
-// ==================== Display Category Data ====================
+// Display Category Data 
 const displayCategoryData = (plants) => {
   const section = document.getElementById("card-section");
   section.innerHTML = "";
@@ -123,11 +121,10 @@ const displayCategoryData = (plants) => {
   }
 };
 
-// ==================== Load All Cards ====================
+// Load All Cards
 const loadCards = () => {
   const cardSection = document.getElementById("card-section");
 
-  // Loader spanning all columns
   cardSection.innerHTML = `
         <div class="col-span-full flex justify-center my-6">
             <span class="loading loading-dots loading-lg"></span>
@@ -142,7 +139,7 @@ const loadCards = () => {
 
 loadCards();
 
-// ==================== Display All Cards ====================
+// Display All Cards 
 const displayCards = (cards) => {
   const cardSection = document.getElementById("card-section");
   cardSection.innerHTML = "";
@@ -180,7 +177,7 @@ const displayCards = (cards) => {
   }
 };
 
-// ==================== Add To Cart ====================
+// Add To Cart
 const addToCart = (product) => {
   const existingItem = cart.find((item) => item.id === product.id);
 
@@ -193,7 +190,7 @@ const addToCart = (product) => {
   displayCart();
 };
 
-// ==================== Display Cart ====================
+// Display Cart 
 const displayCart = () => {
   const cartItems = document.getElementById("cart-items");
   const cartTotal = document.getElementById("cart-total");
@@ -222,13 +219,13 @@ const displayCart = () => {
   cartTotal.innerText = `Total: ৳${total}`;
 };
 
-// ==================== Remove From Cart ====================
+// Remove From Cart
 const removeFromCart = (index) => {
   cart.splice(index, 1);
   displayCart();
 };
 
-// ==================== Open Plant Modal ====================
+// Open Plant Modal 
 const openPlantModal = (plant) => {
   document.getElementById("modalName").innerText = plant.name;
   document.getElementById("modalImage").src = plant.image;
